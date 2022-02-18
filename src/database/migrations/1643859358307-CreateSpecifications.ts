@@ -11,17 +11,14 @@ export class CreateSpecifications1643859358307 implements MigrationInterface {
             type: "uuid",
             isPrimary: true,
           },
-
           {
             name: "name",
             type: "varchar",
           },
-
           {
             name: "description",
             type: "varchar",
           },
-
           {
             name: "created_at",
             type: "timestamp",
