@@ -11,9 +11,7 @@
   "paths": {
     "/categories": {
       "post": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "Create a category",
         "description": "Create a new category",
         "requestBody": {
@@ -47,9 +45,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Category"
-        ],
+        "tags": ["Category"],
         "summary": "List all categories",
         "description": "List all categories",
         "responses": {
@@ -77,18 +73,43 @@
         }
       }
     },
+    "/categories/import": {
+      "post": {
+        "tags": ["Category"],
+        "summary": "Upload new category",
+        "description": "Upload new category",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
     "/specifications": {
       "post": {
-        "tags": [
-          "Specification"
-        ],
+        "tags": ["Specification"],
         "summary": "Create a specification",
         "description": "Create a new specification",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref" :"#/definition/Specification"
+                "$ref": "#/definition/Specification"
               }
             }
           }
@@ -103,9 +124,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Specification"
-        ],
+        "tags": ["Specification"],
         "summary": "List all specifications",
         "description": "List all specifications",
         "responses": {
@@ -132,6 +151,30 @@
           }
         }
       }
+    },
+    "/users": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definition/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Specification Already Exists"
+          }
+        }
+      }
     }
   },
   "definition": {
@@ -148,6 +191,33 @@
       "example": {
         "name": "Specification name sample",
         "description": "Specification description sample"
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "driver_licence": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "name": "User name sample",
+        "password": "User password sample",
+        "username": "User username sample",
+        "email": "User email sample",
+        "driver_licence": "User driver_licence sample"
       }
     }
   }
