@@ -32,7 +32,7 @@ describe("Authenticate User", () => {
     expect(userAuthenticated).toHaveProperty("token");
   });
 
-  it("Shoud be able to authenticate an user", async () => {
+  it("Shoud not be able to authenticate an nonexistent user", async () => {
     expect(async () => {
       const user: ICreateUserDTO = {
         driver_licence: "123456789",
@@ -43,6 +43,23 @@ describe("Authenticate User", () => {
       await authenticateUserUserCase.execute({
         email: user.email,
         password: user.password,
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("Shoud not be able to authenticate an user with wrong password", async () => {
+    expect(async () => {
+      const user: ICreateUserDTO = {
+        driver_licence: "123456789",
+        email: "lucas@hotmail.com",
+        name: "User Teste",
+        password: "123456",
+      };
+      await createUserUseCase.execute(user);
+
+      await authenticateUserUserCase.execute({
+        email: user.email,
+        password: "wrongPassword",
       });
     }).rejects.toBeInstanceOf(AppError);
   });
