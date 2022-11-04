@@ -37,7 +37,6 @@ class CreateCarUseCase {
     if (carAlreadyExists) {
       throw new AppError("Car already exists!");
     }
-    console.log("to aqui");
 
     const car = this.carsRepository.create({
       name,
