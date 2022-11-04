@@ -47,8 +47,8 @@ class CarsRepository implements ICarsRepository {
     category_id?: string,
     name?: string
   ): Promise<Car[]> {
-    const carsQuery = this.repository
-      .createQueryBuilder("cars")
+    const carsQuery = await this.repository
+      .createQueryBuilder("c")
       .where("available = :available", { available: true });
 
     if (brand) {
