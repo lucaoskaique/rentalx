@@ -35,7 +35,6 @@ class CreateCarSpecificationUseCase {
       carExists.specifications = specifications;
 
       await this.carsRepository.create(carExists);
-      console.log(carExists);
       return carExists;
     } catch (err) {
       throw new AppError(`Algo de errado aconteceu: ${err.message}`);
