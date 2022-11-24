@@ -4,24 +4,45 @@ import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "../IRentalsRepository";
 
 class RentalsRepositoryInMemory implements IRentalsRepository {
-  findOpenRentalByCar(car_id: string): Promise<Rental> {
-    throw new Error("Method not implemented.");
+  rentals: Rental[] = [];
+
+  async findOpenRentalByCar(car_id: string): Promise<Rental> {
+    return this.rentals.find(
+      (rental) => rental.car_id === car_id && !rental.end_date
+    );
   }
-  findOpenRentalByUser(user_id: string): Promise<Rental> {
-    throw new Error("Method not implemented.");
+
+  async findOpenRentalByUser(user_id: string): Promise<Rental> {
+    return this.rentals.find(
+      (rental) => rental.user_id === user_id && !rental.end_date
+    );
   }
-  create({
+
+  async create({
     car_id,
     expected_return_date,
     user_id,
   }: ICreateRentalDTO): Promise<Rental> {
-    throw new Error("Method not implemented.");
+    const rental = new Rental();
+
+    Object.assign(rental, {
+      car_id,
+      expected_return_date,
+      user_id,
+      start_date: new Date(),
+    });
+
+    this.rentals.push(rental);
+
+    return rental;
   }
-  findById(id: string): Promise<Rental> {
-    throw new Error("Method not implemented.");
+
+  async findById(id: string): Promise<Rental> {
+    return this.rentals.find((rental) => rental.id === id);
   }
-  findByUser(user_id: string): Promise<Rental[]> {
-    throw new Error("Method not implemented.");
+
+  async findByUser(user_id: string): Promise<Rental[]> {
+    return this.rentals.filter((rental) => rental.user_id === user_id);
   }
 }
 
