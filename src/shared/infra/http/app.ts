@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
@@ -8,7 +9,6 @@ import createConnection from "@shared/infra/database";
 import { router } from "@shared/infra/http/routes";
 
 import swaggerFile from "../../../swagger.json";
-import "@shared/container";
 
 createConnection();
 

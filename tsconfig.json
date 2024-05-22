@@ -5,11 +5,10 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["modules/*"],
-      "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"],
-      "@errors/*": ["errors/*"],
-      "@utils/*": ["utils/*"]
+      "@modules/*" : ["modules/*"],
+      "@config/*" : ["config/*"],
+      "@shared/*" : ["shared/*"],
+      "@utils/*" : ["utils/*"],
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,
